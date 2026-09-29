@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Сборка проекта (make)",
+      "type": "shell",
+      "command": "make",
+      "options": {
+        "shell": {
+          "executable": "pwsh.exe",
+          "args": [
+            "-Command"
+          ]
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Запуск OpenOCD в фоне",
+      "type": "shell",
+      "command": "../at32openocd/bin/openocd.exe",
+      "args": [
+        "-s",
+        "../at32openocd/scripts",
+        "-f",
+        "interface/jlink.cfg",
+        "-c",
+        "transport select swd",
+        "-f",
+        "target/at32f403axx.cfg" // Исправлено под серию 403A
+      ],
+      "isBackground": true,
+      "dependsOn": "Сборка проекта (make)",
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Listening on port",
+          "endsPattern": "Listening on port"
+        }
+      }
+    },
+    {
+      "label": "Остановить OpenOCD",
+      "type": "shell",
+      "command": "taskkill /F /IM openocd.exe",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}

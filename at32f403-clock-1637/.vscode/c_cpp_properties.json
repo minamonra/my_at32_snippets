@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "AT32-GCC",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/../at_lib/bsp",
+        "${workspaceFolder}/../at_lib/cmsis",
+        "${workspaceFolder}/../at_lib/drivers/inc"
+      ],
+      "defines": [
+        "AT32F403ACGU7"
+      ],
+      "compilerPath": "arm-none-eabi-gcc",
+      "cStandard": "c99",
+      "cppStandard": "c++11",
+      "intelliSenseMode": "gcc-arm"
+    }
+  ],
+  "version": 4
+}

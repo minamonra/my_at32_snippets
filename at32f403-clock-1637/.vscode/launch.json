@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "AT32F403A Отладка (Авто-фоновый OpenOCD)",
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceFolder}/build/main.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "external",
+      "gdbTarget": "localhost:3333",
+      // Путь к SVD-файлу серии 403A верхнего уровня bsp
+      "svdFile": "${workspaceFolder}/../at_lib/bsp/AT32F413xx_v2.svd",
+      // Автоматическая сборка и запуск/остановка сервера
+      "preLaunchTask": "Запуск OpenOCD в фоне",
+      "postDebugTask": "Остановить OpenOCD",
+      "runToEntryPoint": "main",
+      "showDevDebugOutput": "raw"
+    }
+  ]
+}
