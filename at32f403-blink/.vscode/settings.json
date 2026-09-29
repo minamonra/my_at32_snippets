@@ -1,0 +1,30 @@
+{
+  "cSpell.enabled": false,
+  "files.associations": {
+    "*.s": "arm"
+  },
+  // Настройки cortex-debug под новую структуру папок
+  "cortex-debug.openocdPath": "${workspaceFolder}/../at32openocd/bin/openocd.exe",
+  "cortex-debug.armToolchainPath": "",
+  "cortex-debug.variableUseNaturalFormat": false,
+  // Настройки отступов для кода (C/C++)
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  // Настройка форматирования кода по стилю Google
+  "C_Cpp.formatting": "clangFormat",
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 2, BreakBeforeBraces: Attach, ColumnLimit: 0, AlignConsecutiveMacros: Consecutive, AlignConsecutiveAssignments: Consecutive, AlignConsecutiveDeclarations: Consecutive, AlignTrailingComments: true }",
+  "editor.formatOnSave": true,
+  // Жесткий запрет на самовольную вставку и сортировку инклудов
+  "C_Cpp.intelliSense.autoAddIncludes": false,
+  "C_Cpp.intelliSense.includeCompletion": "disabled",
+  "C_Cpp.clang_format_sortIncludes": false,
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.default.compilerPath": "arm-none-eabi-gcc",
+  // Настройка табов строго для Makefile (Make требует честные табы!)
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false
+  }
+}
