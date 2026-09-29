@@ -2,11 +2,21 @@
 #include "at32f403a_407_gpio.h"
 #include "at32f403a_407_crm.h"
 
+// Конфигурация частоты ядра
+#define SYS_CLK_HZ  240000000
+#define TICK_PER_MS (SYS_CLK_HZ / 1000)
+
+// Интервалы мигания без блокирующих задержек
+#define BLINK_SLOW_MS   500  // Скорость в покое (медленно)
+#define BLINK_FAST_MS   100  // Скорость при нажатии (быстро)
+#define BTN_DEBOUNCE_MS 20   // Время антидребезга кнопки
+
 // (WeAct BlackPill PC13)
 #define LED_PIN          GPIO_PINS_13
 #define LED_GPIO_PORT    GPIOC
 #define LED_GPIO_CRM_CLK CRM_GPIOC_PERIPH_CLOCK
 
+// Управление светодиодом (на BlackPill катод к пину: TRUE/HIGH = OFF)
 #define LED_SYSTEM_OFF    gpio_bits_write(LED_GPIO_PORT, LED_PIN, TRUE)
 #define LED_SYSTEM_ON     gpio_bits_write(LED_GPIO_PORT, LED_PIN, FALSE)
 #define LED_SYSTEM_TOGGLE gpio_bits_toggle(LED_GPIO_PORT, LED_PIN)
@@ -16,11 +26,6 @@
 #define BTN_GPIO_PORT    GPIOA
 #define BTN_GPIO_CRM_CLK CRM_GPIOA_PERIPH_CLOCK
 
-// Интервалы мигания без блокирующих задержек
-#define BLINK_SLOW_MS   500  // Скорость в покое (медленно)
-#define BLINK_FAST_MS   100  // Скорость при нажатии (быстро)
-#define BTN_DEBOUNCE_MS 20   // Время антидребезга кнопки
-
 // Систик ms
 volatile uint32_t ttms = 0;
 
@@ -29,10 +34,13 @@ void SysTick_Handler(void) {
   ttms++;
 }
 
-// (240 МГц)
+// Инициализация систик таймера
 void init_system_tick(void) {
-  SysTick->LOAD = (240000000 / 1000) - 1;
+  // Настройка на 1 мс при частоте 240 МГц
+  SysTick->LOAD = TICK_PER_MS - 1;
   SysTick->VAL  = 0;
+
+  // Включаем тактирование, разрешаем прерывание (TICKINT) и запускаем таймер
   SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }
 
@@ -61,8 +69,13 @@ void init_periph(void) {
 }
 
 int main(void) {
+  // Настраиваем HSE на 240 МГц (BSP at32f403a_407_clock.h)
   system_clock_config();
+
+  // Запускаем систик
   init_system_tick();
+
+  // Инициализация портов
   init_periph();
 
   uint32_t last_blink_time = 0;      // Время последнего переключения LED
@@ -79,6 +92,7 @@ int main(void) {
       // Читаем физическое состояние пина PA0
       uint8_t btn_raw_state = gpio_input_data_bit_read(BTN_GPIO_PORT, BTN_PIN);
 
+      // Инвертированная логика: кнопка нажата, когда на пине чистый RESET (0)
       if (btn_raw_state == RESET) {
         btn_pressed = TRUE;  // Кнопка удерживается
       } else {

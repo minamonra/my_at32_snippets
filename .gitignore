@@ -1,0 +1,22 @@
+# Сборка и бинарники
+build
+bin
+obj
+.o
+.d
+.elf
+.bin
+.hex
+.map
+
+# Специфичные файлы IDE и редакторов
+.vscode
+.idea
+.suo
+.user
+.workspace
+.swp
+~
+
+# Логи сборки
+.log
