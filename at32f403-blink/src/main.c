@@ -16,7 +16,6 @@
 #define LED_GPIO_PORT    GPIOC
 #define LED_GPIO_CRM_CLK CRM_GPIOC_PERIPH_CLOCK
 
-// Управление светодиодом (на BlackPill катод к пину: TRUE/HIGH = OFF)
 #define LED_SYSTEM_OFF    gpio_bits_write(LED_GPIO_PORT, LED_PIN, TRUE)
 #define LED_SYSTEM_ON     gpio_bits_write(LED_GPIO_PORT, LED_PIN, FALSE)
 #define LED_SYSTEM_TOGGLE gpio_bits_toggle(LED_GPIO_PORT, LED_PIN)
