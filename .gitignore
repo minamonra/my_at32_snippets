@@ -20,3 +20,7 @@ obj
 
 # Логи сборки
 .log
+
+# Временный архив FreeRTOS
+FreeRTOS-main/
+FreeRTOS-Kernel-main/
