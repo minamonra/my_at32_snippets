@@ -24,3 +24,6 @@ obj
 # Временный архив FreeRTOS
 FreeRTOS-main/
 FreeRTOS-Kernel-main/
+AT32F403A_407_Firmware_Library-master/
+WeActStudio.BlackPill-main/
+at32f403-usb-snd/
