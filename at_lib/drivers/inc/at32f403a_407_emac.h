@@ -3,8 +3,7 @@
   * @file     at32f403a_407_emac.h
   * @brief    at32f403a_407 emac header file
   **************************************************************************
-  *
-  * Copyright (c) 2025, Artery Technology, All rights reserved.
+  *                       Copyright notice & Disclaimer
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.

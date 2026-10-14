@@ -11,6 +11,7 @@ obj
 
 # Специфичные файлы IDE и редакторов
 .vscode
+.vscode/
 .idea
 .suo
 .user
@@ -25,5 +26,6 @@ obj
 FreeRTOS-main/
 FreeRTOS-Kernel-main/
 AT32F403A_407_Firmware_Library-master/
+my_at32_snippets-main-old.zip
 WeActStudio.BlackPill-main/
-at32f403-usb-snd/
+
